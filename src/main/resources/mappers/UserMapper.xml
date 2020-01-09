@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uchain.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.uchain.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="INTEGER" />
+    <result column="user_type" property="userType" jdbcType="INTEGER" />
+    <result column="user_picture" property="userPicture" jdbcType="VARCHAR" />
+    <result column="user_signature" property="userSignature" jdbcType="VARCHAR" />
+    <result column="stu_id" property="stuId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_tb
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uchain.entity.User" >
+    insert into user_tb (username, `password`,
+      `role`, user_type, stu_id)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{role,jdbcType=INTEGER}, #{userType,jdbcType=INTEGER}, #{stuId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.uchain.entity.User" >
+    update user_tb
+    set username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      `role` = #{role,jdbcType=INTEGER},
+      user_type = #{userType,jdbcType=INTEGER},
+      user_picture = #{userPicture,jdbcType=VARCHAR},
+      user_signature = #{userSignature,jdbcType=VARCHAR},
+      stu_id = #{stuId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, username, `password`, `role`, user_type, user_picture, user_signature, 
+    stu_id
+    from user_tb
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, username, `password`, `role`, user_type, user_picture, user_signature, 
+    stu_id
+    from user_tb
+  </select>
+  <select id="getUserByStuId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, username, `password`, `role`, user_type, user_picture, user_signature,
+    stu_id
+    from user_tb
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </select>
+</mapper>
