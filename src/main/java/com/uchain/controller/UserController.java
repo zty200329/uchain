@@ -45,7 +45,7 @@ public class UserController {
         return userService.addUser(registerForm,bindingResult);
     }
     @RoleContro(role = RoleEnum.USER)
-    @PostMapping("/updarePw")
+    @PostMapping("/updatePw")
     @ApiOperation("修改密码")
     public ResultVO updatePw(@Valid UserUpdatePwForm userUpdatePwForm){
         return userService.updateUserPw(userUpdatePwForm);
