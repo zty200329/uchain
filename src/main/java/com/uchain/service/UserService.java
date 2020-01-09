@@ -45,7 +45,7 @@ public interface UserService {
      * @param userSignatureForm
      * @return
      */
-    ResultVO userSignature(UserSignatureForm userSignatureForm);
+    ResultVO userSignature(UserSignatureForm userSignatureForm,BindingResult bindingResult);
 
     /**
      * 更新操作
@@ -58,7 +58,7 @@ public interface UserService {
      * @param userUpdatePwForm
      * @return
      */
-    ResultVO updateUserPw(UserUpdatePwForm userUpdatePwForm);
+    ResultVO updateUserPw(UserUpdatePwForm userUpdatePwForm,BindingResult bindingResult);
 
     /**
      * 自拍上传接口

@@ -112,7 +112,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultVO userSignature(UserSignatureForm userSignatureForm) {
+    public ResultVO userSignature(UserSignatureForm userSignatureForm,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            log.info("参数注意必填项！");
+            return ResultVOUtil.error(ResultEnum.PARAMETER_ERROR);
+        }
         User user = getCurrentUser();
         user.setUserSignature(userSignatureForm.getUserSignature());
         if(update(user)){
@@ -137,7 +141,11 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public ResultVO updateUserPw(UserUpdatePwForm userUpdatePwForm) {
+    public ResultVO updateUserPw(UserUpdatePwForm userUpdatePwForm,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            log.info("参数注意必填项！");
+            return ResultVOUtil.error(ResultEnum.PARAMETER_ERROR);
+        }
         User user = getCurrentUser();
         log.info("学号: "+ user.getStuId());
         if(!user.getStuId().equals(userUpdatePwForm.getStuId())){
@@ -178,6 +186,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public ResultVO login(LoginForm loginForm, HttpServletResponse response, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            log.info("参数注意必填项！");
+            return ResultVOUtil.error(ResultEnum.PARAMETER_ERROR);
+        }
         User user = userMapper.getUserByStuId(loginForm.getStuId());
         if(user == null){
             return ResultVOUtil.error(ResultEnum.USER_NOT_EXIST);

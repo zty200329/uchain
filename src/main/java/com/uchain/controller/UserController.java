@@ -47,8 +47,8 @@ public class UserController {
     @RoleContro(role = RoleEnum.USER)
     @PostMapping("/updatePw")
     @ApiOperation("修改密码")
-    public ResultVO updatePw(@Valid UserUpdatePwForm userUpdatePwForm){
-        return userService.updateUserPw(userUpdatePwForm);
+    public ResultVO updatePw(@Valid UserUpdatePwForm userUpdatePwForm,BindingResult bindingResult){
+        return userService.updateUserPw(userUpdatePwForm,bindingResult);
     }
     @RoleContro(role = RoleEnum.USER)
     @PostMapping("/uploadPhoto")
@@ -59,8 +59,8 @@ public class UserController {
     @RoleContro(role = RoleEnum.USER)
     @PostMapping("/userSignature")
     @ApiOperation(("（发布）修改签名"))
-    public ResultVO uploadUserSignature(@Valid UserSignatureForm userSignatureForm){
-        return userService.userSignature(userSignatureForm);
+    public ResultVO uploadUserSignature(@Valid UserSignatureForm userSignatureForm,BindingResult bindingResult){
+        return userService.userSignature(userSignatureForm,bindingResult);
     }
 
 }
