@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uchain.dao.ProBriefMapper" >
+  <resultMap id="BaseResultMap" type="com.uchain.entity.ProBrief" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_user_stu_id" property="proUserStuId" jdbcType="VARCHAR" />
+    <result column="pro_upload_time" property="proUploadTime" jdbcType="DATE" />
+    <result column="pro_show" property="proShow" jdbcType="VARCHAR" />
+    <result column="file_type_id" property="fileTypeId" jdbcType="VARCHAR" />
+    <result column="pro_desc" property="proDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pro_brief
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uchain.entity.ProBrief" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+    insert into pro_brief ( pro_name, pro_user_stu_id,
+      pro_upload_time, pro_show, file_type_id, 
+      pro_desc)
+    values (#{proName,jdbcType=VARCHAR}, #{proUserStuId,jdbcType=VARCHAR},
+      #{proUploadTime,jdbcType=DATE}, #{proShow,jdbcType=VARCHAR}, #{fileTypeId,jdbcType=VARCHAR}, 
+      #{proDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.uchain.entity.ProBrief" >
+    update pro_brief
+    set pro_name = #{proName,jdbcType=VARCHAR},
+      pro_user_stu_id = #{proUserStuId,jdbcType=VARCHAR},
+      pro_upload_time = #{proUploadTime,jdbcType=DATE},
+      pro_show = #{proShow,jdbcType=VARCHAR},
+      file_type_id = #{fileTypeId,jdbcType=VARCHAR},
+      pro_desc = #{proDesc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, pro_name, pro_user_stu_id, pro_upload_time, pro_show, file_type_id, pro_desc
+    from pro_brief
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, pro_name, pro_user_stu_id, pro_upload_time, pro_show, file_type_id, pro_desc
+    from pro_brief
+  </select>
+  <select id="slectByProName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, pro_name, pro_user_stu_id, pro_upload_time, pro_show, file_type_id, pro_desc
+    from pro_brief
+    where pro_name = #{proName,jdbcType=VARCHAR}
+  </select>
+</mapper>

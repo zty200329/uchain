@@ -6,9 +6,9 @@ spring:
       max-request-size: 1024MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: 
-    password: 
-    url: jdbc:mysql://:3306/uchain?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: root
+    password: 123456
+    url: jdbc:mysql://106.15.248.34:3306/uchain?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       # 初始化大小，最小，最大
@@ -23,9 +23,9 @@ spring:
       min-evictable-idle-time-millis: 300000
   redis:
     database: 0 # Redis数据库索引（默认为0）
-    host:  # Redis服务器地址
-    port:  # Redis服务器连接端口
-    password:  # Redis服务器连接密码（默认为空）
+    host: 62.234.111.74 # Redis服务器地址
+    port: 6379 # Redis服务器连接端口
+    password: 200329 # Redis服务器连接密码（默认为空）
     jedis:
       pool:
         max-active: 200 #连接池最大连接数（使用负值表示没有限制）
@@ -49,5 +49,7 @@ mybatis:
 img:
   location: D:\\photo\\
   url: http://127.0.0.1:8081
+Pro:
+  realPath: D:\\project\\
 server:
   port: 8081

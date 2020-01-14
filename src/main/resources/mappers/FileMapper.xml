@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uchain.dao.FileMapper" >
+  <resultMap id="BaseResultMap" type="com.uchain.entity.File" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_type_id" property="fileTypeId" jdbcType="VARCHAR" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="pro_id" property="proId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uchain.entity.File" >
+    insert into file ( file_name, file_type_id,
+      file_url, pro_id)
+    values (#{fileName,jdbcType=VARCHAR}, #{fileTypeId,jdbcType=VARCHAR},
+      #{fileUrl,jdbcType=VARCHAR}, #{proId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.uchain.entity.File" >
+    update file
+    set file_name = #{fileName,jdbcType=VARCHAR},
+      file_type_id = #{fileTypeId,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      pro_id = #{proId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, file_name, file_type_id, file_url, pro_id
+    from file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, file_name, file_type_id, file_url, pro_id
+    from file
+  </select>
+</mapper>

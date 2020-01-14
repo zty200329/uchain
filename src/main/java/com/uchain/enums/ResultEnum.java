@@ -23,8 +23,9 @@ public enum ResultEnum {
     PARAMETER_ERROR(4,"请注意必填项"),
     USER_HAS_EXIST(5, "用户已经存在"),
     IS_NOT_PERSONAL_OPERATION(6,"用户名不存在,修改密码失败"),
-    UPLOAD_SIGNATURES_FAIL(7,"修改签名失败");
-
+    UPLOAD_SIGNATURES_FAIL(7,"修改签名失败"),
+    PROJECT_HAS_EXIST(8,"项目已经存在了"),
+    UPLOAD_FILE(9,"文件上传失败");
 
     private Integer code;
 
