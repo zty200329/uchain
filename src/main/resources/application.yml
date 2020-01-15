@@ -51,5 +51,6 @@ img:
   url: http://127.0.0.1:8081
 Pro:
   realPath: D:\\project\\
+  linshi: D:\\linshi\\
 server:
   port: 8081

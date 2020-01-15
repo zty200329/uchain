@@ -46,4 +46,9 @@
     from pro_brief
     where pro_name = #{proName,jdbcType=VARCHAR}
   </select>
+  <select id="selectByTypeId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, pro_name, pro_user_stu_id, pro_upload_time, pro_show, file_type_id, pro_desc
+    from pro_brief
+    where file_type_id = #{fileTypeId,jdbcType=VARCHAR}
+  </select>
 </mapper>

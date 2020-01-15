@@ -15,4 +15,8 @@ public interface FileMapper {
     List<File> selectAll();
 
     int updateByPrimaryKey(File record);
+
+    List<File> selectByProId(Integer id);
+
+    int deleteByProId(Integer proId);
 }

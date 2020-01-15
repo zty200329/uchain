@@ -17,4 +17,6 @@ public interface ProBriefMapper {
     int updateByPrimaryKey(ProBrief record);
 
     ProBrief slectByProName(String name);
+
+    List<ProBrief> selectByTypeId(String typeId);
 }

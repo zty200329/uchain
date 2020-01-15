@@ -8,6 +8,10 @@
     <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
     <result column="pro_id" property="proId" jdbcType="INTEGER" />
   </resultMap>
+  <delete id="deleteByProId" parameterType="java.lang.Integer" >
+    delete from file
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from file
     where id = #{id,jdbcType=INTEGER}
@@ -34,5 +38,10 @@
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, file_name, file_type_id, file_url, pro_id
     from file
+  </select>
+  <select id="selectByProId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, file_name, file_type_id, file_url, pro_id
+    from file
+    where pro_id = #{proId,jdbcType=INTEGER}
   </select>
 </mapper>

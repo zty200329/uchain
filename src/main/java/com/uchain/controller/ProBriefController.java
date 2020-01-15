@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
@@ -30,10 +31,34 @@ public class ProBriefController {
 
     @RoleContro(role = RoleEnum.ADMIN)
     @PostMapping("/uploadPro")
-    @ApiOperation(("上传项目"))
+    @ApiOperation("上传项目")
     public ResultVO uploadProBiref(@Valid ProBriefForm proBriefForm, @RequestParam("files") MultipartFile[] files, BindingResult bindingResult){
         System.out.println(files);
         return proBriefService.uploadProBrief(proBriefForm,files,bindingResult);
     }
 
+    @RoleContro(role = RoleEnum.USER)
+    @GetMapping("/downloadPro")
+    @ApiOperation("下载项目")
+    public ResultVO downloadPro(Integer id, HttpServletResponse response){
+        return proBriefService.downloadPro(id,response);
+    }
+    @RoleContro(role = RoleEnum.ADMIN)
+    @GetMapping("/delPro")
+    @ApiOperation("删除一个项目")
+    public ResultVO delProBrief(Integer id){
+        return proBriefService.delProBrief(id);
+    }
+    @RoleContro(role = RoleEnum.USER)
+    @GetMapping("/getByGroupId")
+    @ApiOperation("获取一个方向的所有资源")
+    public ResultVO getGroupPro(String typeId){
+        return proBriefService.getGroupPro(typeId);
+    }
+    @RoleContro(role = RoleEnum.USER)
+    @GetMapping("/GetAllPro")
+    @ApiOperation("获取所有项目")
+    public ResultVO getAllPro(){
+        return proBriefService.getAllPro();
+    }
 }

@@ -153,8 +153,8 @@ public class ZipUtils {
     /**
      * 拷贝文件夹
      *
-     * @param sourcePath原文件夹
-     * @param newPath指定文件夹
+     * @param oldPath 原文件夹
+     * @param newPath 指定文件夹
      */
     public static void copyDir(String oldPath, String newPath) throws IOException {
         File file = new File(oldPath);
@@ -180,8 +180,8 @@ public class ZipUtils {
     /**
      * 拷贝文件
      *
-     * @param oldFilePath资源文件
-     * @param newPath指定文件
+     * @param oldPath 资源文件
+     * @param newPath 指定文件
      */
     public static void copyFile(String oldPath, String newPath) throws IOException {
         File oldFile = new File(oldPath);

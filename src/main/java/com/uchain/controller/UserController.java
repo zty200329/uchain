@@ -1,7 +1,6 @@
 package com.uchain.controller;
 
 import com.uchain.accessctro.RoleContro;
-import com.uchain.dao.UserMapper;
 import com.uchain.enums.RoleEnum;
 import com.uchain.form.LoginForm;
 import com.uchain.form.UserRegisterForm;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**

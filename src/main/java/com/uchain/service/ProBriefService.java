@@ -1,9 +1,12 @@
 package com.uchain.service;
 
+import com.sun.deploy.net.HttpResponse;
 import com.uchain.form.ProBriefForm;
 import com.uchain.vo.ResultVO;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author: zty
@@ -18,4 +21,12 @@ public interface ProBriefService {
     ResultVO uploadProBrief(ProBriefForm proBriefForm, MultipartFile[] files, BindingResult bindingResult);
 
     Boolean isProExist(String proName);
+
+    ResultVO downloadPro(Integer id, HttpServletResponse response);
+
+    ResultVO delProBrief(Integer id);
+
+    ResultVO getGroupPro(String typeId);
+
+    ResultVO getAllPro();
 }
