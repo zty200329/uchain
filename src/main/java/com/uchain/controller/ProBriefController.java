@@ -22,7 +22,7 @@ import javax.validation.Valid;
  */
 @Slf4j
 @RestController
-@RequestMapping("/probrief")
+@RequestMapping("/proBrief")
 @Api(tags = "项目管理接口")
 @CrossOrigin
 public class ProBriefController {

@@ -79,7 +79,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/images/**").permitAll()
-                .antMatchers("/probrief/**").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/configuration/ui").permitAll()
@@ -89,7 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/anon/login/**").permitAll()
                 .antMatchers("/admin/**").permitAll()
                 .antMatchers("/image/**").permitAll()
-                .antMatchers("/message/getArticleLeaveWord/**").permitAll()
+                .antMatchers("/proBrief/**").permitAll()
                 .anyRequest().authenticated();
 
         //配置自己的验证过滤器
