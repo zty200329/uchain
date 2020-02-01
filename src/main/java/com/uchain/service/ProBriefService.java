@@ -18,7 +18,7 @@ public interface ProBriefService {
      * 上传一个项目
      * @return
      */
-    ResultVO uploadProBrief(ProBriefForm proBriefForm, MultipartFile[] files, BindingResult bindingResult);
+    ResultVO uploadProBrief(ProBriefForm proBriefForm, MultipartFile file, BindingResult bindingResult);
 
     Boolean isProExist(String proName);
 

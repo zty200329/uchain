@@ -15,15 +15,16 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
+import sun.applet.Main;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -47,7 +48,8 @@ public class ProBriefServiceImpl implements ProBriefService {
     private String linshiPath;
     @Override
     @Transactional
-    public ResultVO uploadProBrief(ProBriefForm proBriefForm, MultipartFile[] files, BindingResult bindingResult) {
+
+    public ResultVO uploadProBrief(ProBriefForm proBriefForm, MultipartFile file, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             log.error("参数出错，注意必填项");
             return ResultVOUtil.error(ResultEnum.PARAMETER_ERROR);
@@ -77,29 +79,25 @@ public class ProBriefServiceImpl implements ProBriefService {
         proBriefMapper.insert(proBrief);
         int proId = proBrief.getId();
 
-        List<MultipartFile>multipartFiles = Arrays.asList(files);
-        MultipartFile file = null;
-        for (MultipartFile multipartFile : multipartFiles) {
-            file = multipartFile;
-            if(!file.isEmpty()){
-                try {
-                    com.uchain.entity.File multipartfile = new com.uchain.entity.File();
-                    //文件名
-                    String fileName = file.getOriginalFilename();
-                    log.info("上传文件名："+fileName);
-                    FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realPath+proBriefForm.getProName()+"\\"+fileName));
-                    multipartfile.setFileName(fileName);
-                    multipartfile.setFileTypeId(proBriefForm.getFileType());
-                    multipartfile.setFileUrl(realPath+proBriefForm.getProName());
-                    multipartfile.setProId(proId);
-                    fileMapper.insert(multipartfile);
-                }catch (Exception e){
-                    return ResultVOUtil.error(ResultEnum.UPLOAD_FILE);
-                }
-            }
+
+        log.info("开始上传文件");
+        // 获取文件名
+        String fileName = file.getOriginalFilename();
+        try {
+            FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realPath+proBriefForm.getProName()+File.separator+file.getOriginalFilename()));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        com.uchain.entity.File multipartfile = new com.uchain.entity.File();
+        multipartfile.setFileName(fileName);
+        multipartfile.setFileTypeId(proBriefForm.getFileType());
+        multipartfile.setFileUrl(realPath+proBriefForm.getProName());
+        multipartfile.setProId(proId);
+        fileMapper.insert(multipartfile);
+
         return ResultVOUtil.success();
     }
+
 
     /**
      * 根据传入的项目名来判断项目是否存在

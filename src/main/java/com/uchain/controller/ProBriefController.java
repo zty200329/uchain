@@ -32,9 +32,9 @@ public class ProBriefController {
     @RoleContro(role = RoleEnum.ADMIN)
     @PostMapping("/uploadPro")
     @ApiOperation("上传项目")
-    public ResultVO uploadProBiref(@Valid ProBriefForm proBriefForm, @RequestParam("files") MultipartFile[] files, BindingResult bindingResult){
-        System.out.println(files);
-        return proBriefService.uploadProBrief(proBriefForm,files,bindingResult);
+    public ResultVO uploadProBiref(@Valid ProBriefForm proBriefForm, @RequestParam("file") MultipartFile file, BindingResult bindingResult){
+        System.out.println(file.isEmpty());
+        return proBriefService.uploadProBrief(proBriefForm,file,bindingResult);
     }
 
     @RoleContro(role = RoleEnum.USER)
