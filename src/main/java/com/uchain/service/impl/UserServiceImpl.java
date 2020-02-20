@@ -16,10 +16,7 @@ import com.uchain.util.JwtTokenUtil;
 import com.uchain.util.RedisUtil;
 import com.uchain.util.ResultVOUtil;
 import com.uchain.util.UploadUtil;
-import com.uchain.vo.AllUserVO;
-import com.uchain.vo.GroupUserVO;
-import com.uchain.vo.ResultVO;
-import com.uchain.vo.UserVO;
+import com.uchain.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -278,6 +275,23 @@ public class UserServiceImpl implements UserService {
         }
         userMapper.updateByPrimaryKey(user);
         return ResultVOUtil.success();
+    }
+
+    @Override
+    public ResultVO showUsers() {
+        List<User> users;
+        users = userMapper.selectAll();
+        int i = 1;
+        List<ShowUserVO> showUserVOS = new ArrayList<>();
+        for (User user : users) {
+            ShowUserVO showUserVO = new ShowUserVO();
+            BeanUtils.copyProperties(user, showUserVO);
+            showUserVO.setGroupType(GroupEnum.getGroup(user.getGroupId()));
+            showUserVO.setKey(i);
+            i++;
+            showUserVOS.add(showUserVO);
+        }
+        return ResultVOUtil.success(showUserVOS);
     }
 
     @Override

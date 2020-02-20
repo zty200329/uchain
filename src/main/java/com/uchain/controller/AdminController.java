@@ -70,6 +70,13 @@ public class AdminController {
         return userService.deleteUser(stuId);
     }
 
+    @PostMapping("/updateRole")
+    @ApiOperation("更改用户权限")
+    @RoleContro(role = RoleEnum.ADMIN)
+    public ResultVO updateRole(@RequestParam("stuId") String stuId) {
+        return userService.updateRole(stuId);
+    }
+
     @PostMapping("/updateUser")
     @ApiOperation("修改用户信息")
     @RoleContro(role = RoleEnum.ADMIN)

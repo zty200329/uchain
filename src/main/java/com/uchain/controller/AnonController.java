@@ -11,10 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -30,7 +27,7 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequestMapping("/anon")
-@Api(tags = "登录接口")
+@Api(tags = "登录接口和匿名访问接口")
 @CrossOrigin
 public class AnonController {
 
@@ -45,5 +42,11 @@ public class AnonController {
             return ResultVOUtil.error(ResultEnum.PARAMETER_ERROR);
         }
         return userService.login(loginForm, response);
+    }
+
+    @ApiOperation("首页展示团队成员信息")
+    @GetMapping("/showUsers")
+    public ResultVO showUsers() {
+        return userService.showUsers();
     }
 }

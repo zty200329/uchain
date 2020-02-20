@@ -136,4 +136,11 @@ public interface UserService {
      */
     ResultVO updateRole(String stuId);
 
+    /**
+     * 首页展示所有的用户
+     *
+     * @return
+     */
+    ResultVO showUsers();
+
 }
