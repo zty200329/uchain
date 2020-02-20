@@ -26,7 +26,13 @@ public enum ResultEnum {
     UPLOAD_SIGNATURES_FAIL(7,"修改签名失败"),
     PROJECT_HAS_EXIST(8,"项目已经存在了"),
     UPLOAD_FILE(9,"文件上传失败"),
-    FILE_IS_NOT_EXIST(10,"文件不存在");
+    FILE_IS_NOT_EXIST(10,"文件不存在"),
+    RESOURCE_DELETE_FAILED(11,"删除资源失败"),
+    RESOURCE_ADD_FAILED(12,"添加资源失败"),
+    RESOURCE_UPDATE_FAILED(13,"更新资源失败"),
+    RESOURCE_NOT_EXISTED(14,"资源不存在"),
+    RESOURCE_QUERY_FAILED(15,"查询资源失败")
+    ;
 
     private Integer code;
 

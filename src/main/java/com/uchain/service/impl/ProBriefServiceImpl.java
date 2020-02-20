@@ -144,8 +144,10 @@ public class ProBriefServiceImpl implements ProBriefService {
         /**
          * 设置response的header
          */
+        ProBrief proBrief = proBriefMapper.selectByPrimaryKey(id);
+        String name = proBrief.getProName();
         response.setContentType("application/zip");
-        response.setHeader("Content-Disposition", "attachment; filename=uchainfile.zip");
+        response.setHeader("Content-Disposition", "attachment; filename="+name);
         /**
          * 4.调用工具类，下载zip压缩包
          */

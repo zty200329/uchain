@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ControllerLog {
 
-    @Pointcut("execution(public * com.zty.blog.controller.*.*(..))")
+    @Pointcut("execution(public * com.uchain.controller.*.*(..))")
     public void controller() {
     }
 

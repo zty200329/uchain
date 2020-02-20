@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceLog {
 
-    @Pointcut("execution(public * com.zty.blog.service.*.*(..))")
+    @Pointcut("execution(public * com.uchain.service.*.*(..))")
     public void service() {
 
     }
