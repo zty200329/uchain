@@ -3,15 +3,16 @@ package com.uchain.form;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-
 /**
- * @Author: zty
- * @Date: 2020/1/9 15:07
- */
+ * @ClassName UserInformationForm
+ * @Description 修改个性签名和个人简介的表单
+ * @Author Lenovo
+ * @Date 2020/2/15
+ * @Version 1.0
+ **/
 @Data
 public class UserSignatureForm {
-    @NotNull(message = "个性签名不能为空")
+
     @ApiModelProperty("个性签名")
-    String userSignature;
+    private String userSignature;
 }

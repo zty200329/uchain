@@ -84,12 +84,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/configuration/ui").permitAll()
                 .antMatchers("/configuration/security").permitAll()
                 //配置允许匿名访问的路径
-                .antMatchers("/anon/userRegister/**").permitAll()
-                .antMatchers("/anon/login/**").permitAll()
                 .antMatchers("/admin/**").permitAll()
                 .antMatchers("/image/**").permitAll()
                 .antMatchers("/proBrief/**").permitAll()
                 .antMatchers("/re/**").permitAll()
+                .antMatchers("/anon/login/**").permitAll()
+                .antMatchers("/image/**").permitAll()
                 .anyRequest().authenticated();
 
         //配置自己的验证过滤器

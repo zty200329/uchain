@@ -6,9 +6,13 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 /**
- * @Author: zty
- * @Date: 2020/1/8 10:22
- */
+ * @ClassName UserUpdatePwForm
+ * @Description 修改密码
+ * @Author Lenovo
+ * @Date 2020/2/15
+ * @Version 1.0
+ **/
+
 @Data
 public class UserUpdatePwForm {
     @NotNull(message = "学号不能为空")

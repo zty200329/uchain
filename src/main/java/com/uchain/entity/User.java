@@ -3,56 +3,30 @@ package com.uchain.entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private Integer id;
+    private String stuId;
 
-    /**
-     * 姓名
-     */
-    private String username;
-
-    /**
-     * 密码
-     */
     private String password;
 
-    /**
-     * 权限
-     */
+    private String userName;
+
+    private Integer groupId;
+
     private Integer role;
 
-    /**
-     * 用户所属小组
-     */
-    private Integer userType;
+    private String userDesc;
 
-    /**
-     * 自拍url
-     */
-    private String userPicture;
-
-    /**
-     * 个性签名
-     */
     private String userSignature;
 
-    private String stuId;
+    private String headPictureUrl;
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
-        return id;
+    public String getStuId() {
+        return stuId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setStuId(String stuId) {
+        this.stuId = stuId == null ? null : stuId.trim();
     }
 
     public String getPassword() {
@@ -63,6 +37,22 @@ public class User implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
     public Integer getRole() {
         return role;
     }
@@ -71,20 +61,12 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public Integer getUserType() {
-        return userType;
+    public String getUserDesc() {
+        return userDesc;
     }
 
-    public void setUserType(Integer userType) {
-        this.userType = userType;
-    }
-
-    public String getUserPicture() {
-        return userPicture;
-    }
-
-    public void setUserPicture(String userPicture) {
-        this.userPicture = userPicture == null ? null : userPicture.trim();
+    public void setUserDesc(String userDesc) {
+        this.userDesc = userDesc == null ? null : userDesc.trim();
     }
 
     public String getUserSignature() {
@@ -95,12 +77,12 @@ public class User implements Serializable {
         this.userSignature = userSignature == null ? null : userSignature.trim();
     }
 
-    public String getStuId() {
-        return stuId;
+    public String getHeadPictureUrl() {
+        return headPictureUrl;
     }
 
-    public void setStuId(String stuId) {
-        this.stuId = stuId == null ? null : stuId.trim();
+    public void setHeadPictureUrl(String headPictureUrl) {
+        this.headPictureUrl = headPictureUrl == null ? null : headPictureUrl.trim();
     }
 
     @Override
@@ -109,14 +91,14 @@ public class User implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", role=").append(role);
-        sb.append(", userType=").append(userType);
-        sb.append(", userPicture=").append(userPicture);
-        sb.append(", userSignature=").append(userSignature);
         sb.append(", stuId=").append(stuId);
+        sb.append(", password=").append(password);
+        sb.append(", userName=").append(userName);
+        sb.append(", groupId=").append(groupId);
+        sb.append(", role=").append(role);
+        sb.append(", userDesc=").append(userDesc);
+        sb.append(", userSignature=").append(userSignature);
+        sb.append(", headPictureUrl=").append(headPictureUrl);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
