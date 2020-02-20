@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uchain.dao.ContributeMapper">
+  <resultMap id="BaseResultMap" type="com.uchain.entity.Contribute">
+    <id column="con_id" jdbcType="INTEGER" property="conId" />
+    <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="re_name" jdbcType="VARCHAR" property="reName" />
+    <result column="re_url" jdbcType="VARCHAR" property="reUrl" />
+    <result column="re_brief" jdbcType="VARCHAR" property="reBrief" />
+    <result column="re_time" jdbcType="TIMESTAMP" property="reTime" />
+    <result column="re_tag" jdbcType="INTEGER" property="reTag" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contribute
+    where con_id = #{conId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uchain.entity.Contribute"
+          useGeneratedKeys="true" keyProperty="conId">
+    insert into contribute (stu_id, stu_name,
+      group_id, re_name, re_url,
+      re_brief, re_tag
+      )
+    values (#{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR},
+      #{groupId,jdbcType=INTEGER}, #{reName,jdbcType=VARCHAR}, #{reUrl,jdbcType=VARCHAR},
+      #{reBrief,jdbcType=VARCHAR}, #{reTag,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.uchain.entity.Contribute">
+    update contribute
+    set stu_id = #{stuId,jdbcType=VARCHAR},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER},
+      re_name = #{reName,jdbcType=VARCHAR},
+      re_url = #{reUrl,jdbcType=VARCHAR},
+      re_brief = #{reBrief,jdbcType=VARCHAR},
+      re_tag = #{reTag,jdbcType=INTEGER}
+    where con_id = #{conId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select con_id, stu_id, stu_name, group_id, re_name, re_url, re_brief, re_time, re_tag
+    from contribute
+    where con_id = #{conId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select con_id, stu_id, stu_name, group_id, re_name, re_url, re_brief,
+    FROM_UNIXTIME(re_time), re_tag
+    from contribute
+  </select>
+
+<!--  添加方法-->
+<!--  根据小组编号查询  List<Contribute> queryByName(String stuName);-->
+  <select id="queryByGroupId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select con_id, stu_id, stu_name, group_id, re_name, re_url, re_brief, re_time, re_tag
+    from contribute
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+
+<!-- 根据资源名称进行模糊查询 List<Contribute> queryByGroupId-->
+  <select id="queryByReName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select con_id, stu_id, stu_name, group_id, re_name, re_url, re_brief,re_time, re_tag
+    from contribute
+    where re_name like "%"#{reName,jdbcType=VARCHAR}"%"
+  </select>
+
+<!--  根据编号查询 List<Contribute> queryByTagId(Integer tagId);-->
+  <select id="queryByTagId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select con_id, stu_id, stu_name, group_id, re_name, re_url, re_brief, re_time, re_tag
+    from contribute
+    where re_tag = #{tagId,jdbcType=INTEGER}
+
+  </select>
+
+  <!-- 根据学生姓名进行模糊查询 List<Contribute> queryByGroupId-->
+  <select id="queryByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select con_id, stu_id, stu_name, group_id, re_name, re_url, re_brief, re_time, re_tag
+    from contribute
+    where stu_name like "%"#{stuName,jdbcType=VARCHAR}"%"
+  </select>
+</mapper>
