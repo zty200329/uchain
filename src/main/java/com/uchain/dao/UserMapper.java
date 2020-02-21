@@ -1,21 +1,24 @@
 package com.uchain.dao;
 
 import com.uchain.entity.User;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
-@Component
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String stuId);
 
     int insert(User record);
 
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(String stuId);
 
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
 
-    User getUserByStuId(String name);
+    /**
+     * 通过小组查找用户
+     *
+     * @param groupId
+     * @return
+     */
+    List<User> selectByGroupId(Integer groupId);
 }

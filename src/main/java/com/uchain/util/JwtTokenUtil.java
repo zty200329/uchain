@@ -146,7 +146,12 @@ public class JwtTokenUtil {
         return generateToken(claims);
     }
 
-    //判断是否在10分钟后并在有效期内
+    /**
+     * 判断是否在10分钟后并在有效期内
+     *
+     * @param token
+     * @return
+     */
     public Boolean canTokenBeRefreshed(String token) {
         final Date created = getCreatDateFromToken(token);
         return token != null && created != null && isCreatedAfterTenMinutes(created)

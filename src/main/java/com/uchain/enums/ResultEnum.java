@@ -17,12 +17,12 @@ public enum ResultEnum {
     SERVER_ERROR(500, "服务器未知错误:%s"),
     BIND_ERROR(511, "参数校验错误:%s"),
     REQUEST_METHOD_ERROR(550, "不支持%s的请求方式"),
-    USER_NOT_EXIST(1, "用户不存在"),
-    PASSWORD_ERROR(2, "密码错误"),
-    SQL_ERROR(3, "添加用户失败"),
-    PARAMETER_ERROR(4,"请注意必填项"),
-    USER_HAS_EXIST(5, "用户已经存在"),
-    IS_NOT_PERSONAL_OPERATION(6,"用户名不存在,修改密码失败"),
+    USER_NOT_EXIST(1,"此用户不存在" ),
+    PASSWORD_ERROR(2,"密码错误" ),
+    OLD_PASSWORD_ERROR(3,"原密码错误" ),
+    IS_NOT_PERSONAL_OPERATION(4,"非本人操作" ),
+    USER_ALREADY_EXIST(5, "此用户已存在"),
+    PARAMETER_ERROR(6,"请注意必填项"),
     UPLOAD_SIGNATURES_FAIL(7,"修改签名失败"),
     PROJECT_HAS_EXIST(8,"项目已经存在了"),
     UPLOAD_FILE(9,"文件上传失败"),
@@ -31,7 +31,9 @@ public enum ResultEnum {
     RESOURCE_ADD_FAILED(12,"添加资源失败"),
     RESOURCE_UPDATE_FAILED(13,"更新资源失败"),
     RESOURCE_NOT_EXISTED(14,"资源不存在"),
-    RESOURCE_QUERY_FAILED(15,"查询资源失败")
+    RESOURCE_QUERY_FAILED(15,"查询资源失败"),
+    SQL_ERROR(16,"sql语句执行失败"),
+    USER_DELETE_FAILED(17,"用户删除失败");
     ;
 
     private Integer code;

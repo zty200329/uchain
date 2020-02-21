@@ -1,6 +1,6 @@
 package com.uchain.service.impl;
 
-import com.sun.deploy.net.HttpResponse;
+
 import com.uchain.dao.FileMapper;
 import com.uchain.dao.ProBriefMapper;
 import com.uchain.entity.ProBrief;
@@ -19,16 +19,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
-import sun.applet.Main;
+
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
+
 import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
+
+
+
 import java.util.List;
 
 /**
