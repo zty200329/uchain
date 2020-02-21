@@ -22,7 +22,11 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/image/**").addResourceLocations("file:" + folder);
-        super.addResourceHandlers(registry);
+        registry.addResourceHandler("/image/**")
+                .addResourceLocations("file:" + folder);
+        registry.addResourceHandler("/getPic/**")
+                //配置真实路径
+                .addResourceLocations("file:" + folder);
+
     }
 }

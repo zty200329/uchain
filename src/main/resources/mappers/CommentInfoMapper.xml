@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uchain.dao.CommentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.uchain.entity.CommentInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="comment_user" property="commentUser" jdbcType="VARCHAR" />
+    <result column="comment_msg" property="commentMsg" jdbcType="VARCHAR" />
+    <result column="comment_blog" property="commentBlog" jdbcType="INTEGER" />
+    <result column="comment_father" property="commentFather" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="reply_user_id" property="replyUserId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uchain.entity.CommentInfo" >
+    insert into tb_comment (id, comment_user, comment_msg, 
+      comment_blog, comment_father, create_time, 
+      reply_user_id)
+    values (#{id,jdbcType=INTEGER}, #{commentUser,jdbcType=VARCHAR}, #{commentMsg,jdbcType=VARCHAR}, 
+      #{commentBlog,jdbcType=INTEGER}, #{commentFather,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, 
+      #{replyUserId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.uchain.entity.CommentInfo" >
+    update tb_comment
+    set comment_user = #{commentUser,jdbcType=VARCHAR},
+      comment_msg = #{commentMsg,jdbcType=VARCHAR},
+      comment_blog = #{commentBlog,jdbcType=INTEGER},
+      comment_father = #{commentFather,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      reply_user_id = #{replyUserId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, comment_user, comment_msg, comment_blog, comment_father, create_time, 
+    reply_user_id
+    from tb_comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, comment_user, comment_msg, comment_blog, comment_father, create_time,
+    reply_user_id
+    from tb_comment
+  </select>
+    <select id="selectByBlogId" resultType="com.uchain.entity.CommentInfo">
+    select id, comment_user, comment_msg, comment_blog, comment_father, create_time,
+    reply_user_id
+    from tb_comment
+    where comment_blog = #{bid}
+    </select>
+</mapper>

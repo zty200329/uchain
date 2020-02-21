@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uchain.dao.BlogInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.uchain.entity.BlogInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="article_type" property="articleType" jdbcType="INTEGER" />
+    <result column="article_owner" property="articleOwner" jdbcType="VARCHAR" />
+    <result column="article_tittle" property="articleTittle" jdbcType="VARCHAR" />
+    <result column="article_create_time" property="articleCreateTime" jdbcType="VARCHAR" />
+    <result column="isTop" property="istop" jdbcType="INTEGER" />
+    <result column="article_like" property="articleLike" jdbcType="INTEGER" />
+    <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_blog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uchain.entity.BlogInfo" >
+    insert into tb_blog (id, article_type, article_owner, 
+      article_tittle, article_create_time, isTop, 
+      article_like, article_content)
+    values (#{id,jdbcType=INTEGER}, #{articleType,jdbcType=INTEGER}, #{articleOwner,jdbcType=VARCHAR}, 
+      #{articleTittle,jdbcType=VARCHAR}, #{articleCreateTime,jdbcType=VARCHAR}, #{istop,jdbcType=INTEGER}, 
+      #{articleLike,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.uchain.entity.BlogInfo" >
+    update tb_blog
+    set article_type = #{articleType,jdbcType=INTEGER},
+      article_owner = #{articleOwner,jdbcType=VARCHAR},
+      article_tittle = #{articleTittle,jdbcType=VARCHAR},
+      article_create_time = #{articleCreateTime,jdbcType=VARCHAR},
+      isTop = #{istop,jdbcType=INTEGER},
+      article_like = #{articleLike,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, article_type, article_owner, article_tittle, article_create_time, isTop, 
+    article_like, article_content
+    from tb_blog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, article_type, article_owner, article_tittle, article_create_time, isTop, 
+    article_like, article_content
+    from tb_blog
+  </select>
+  <select id="selectByArticleOwner" resultType="com.uchain.entity.BlogInfo">
+    select id, article_type, article_owner, article_tittle, article_create_time, isTop,
+    article_like, article_content
+    from tb_blog
+    where article_owner = #{articleOwner}
+  </select>
+  <select id="selectByArticleTittle" resultType="com.uchain.entity.BlogInfo">
+    select id, article_type, article_owner, article_tittle, article_create_time, isTop,
+    article_like, article_content
+    from tb_blog
+    where article_tittle = #{articleTittle}
+  </select>
+  <select id="selectByArticleType" resultType="com.uchain.entity.BlogInfo">
+    select id, article_type, article_owner, article_tittle, article_create_time, isTop,
+    article_like, article_content
+    from tb_blog
+    where article_type = #{type}
+  </select>
+
+</mapper>
