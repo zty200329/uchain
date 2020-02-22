@@ -89,6 +89,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/re/**").permitAll()
                 .antMatchers("/anon/**").permitAll()
                 .antMatchers("/image/**").permitAll()
+                .antMatchers("/comment/**").permitAll()
+                .antMatchers("/blog/**").permitAll()
                 .anyRequest().authenticated();
 
         //配置自己的验证过滤器

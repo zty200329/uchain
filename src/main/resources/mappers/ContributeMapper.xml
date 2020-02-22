@@ -64,9 +64,9 @@
     where re_name like "%"#{reName,jdbcType=VARCHAR}"%"
   </select>
 
-<!--  根据编号查询 List<Contribute> queryByTagId(Integer tagId);-->
+<!--  根据编号查询 List<Contribute> queryByTagId(Integer tagId); 为提高速度 不返回re_brief-->
   <select id="queryByTagId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select con_id, stu_id, stu_name, group_id, re_name, re_url, re_brief, re_time, re_tag
+    select con_id, stu_id, stu_name, group_id, re_name, re_url,  re_time, re_tag
     from contribute
     where re_tag = #{tagId,jdbcType=INTEGER}
 

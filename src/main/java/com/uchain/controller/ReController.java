@@ -91,4 +91,10 @@ public class ReController {
         return reService.queryReByName(name);
     }
 
+    @RoleContro(role = RoleEnum.USER)
+    @PostMapping("/queryReById")
+    @ApiOperation("根据id查询资源")
+    public ResultVO queryReById(Integer conId){
+        return reService.queryReById(conId);
+    }
 }

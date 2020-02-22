@@ -102,5 +102,11 @@ public class ReServiceImpl implements ReService {
         List<Contribute> contributeList = contributeMapper.queryByReName(name);
         return ResultVOUtil.success(contributeList);
     }
+
+    @Override
+    public ResultVO queryReById(Integer id) {
+        Contribute contribute = contributeMapper.selectByPrimaryKey(id);
+        return ResultVOUtil.success(contribute);
+    }
 }
 
