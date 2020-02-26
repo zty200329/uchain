@@ -42,7 +42,7 @@ public class CommentController {
     }
 
     @GetMapping("/getAComment")
-    @ApiOperation("获取单个博客")
+    @ApiOperation("获取单个评论")
     public Object getAComment(Integer id){
         return commentService.getOne(id);
     }

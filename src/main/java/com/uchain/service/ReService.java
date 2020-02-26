@@ -70,5 +70,10 @@ public interface ReService {
      */
     public ResultVO queryReByName(String name);
 
-
+    /**
+     * 根据id查询资源
+     * @param id
+     * @return
+     */
+    public ResultVO queryReById(Integer id);
 }

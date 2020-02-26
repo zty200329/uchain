@@ -2,6 +2,7 @@ package com.uchain.service;
 
 import com.uchain.entity.BlogInfo;
 import com.uchain.form.BlogForm;
+import com.uchain.vo.PicVO;
 import com.uchain.vo.ResultVO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -72,7 +73,7 @@ public interface BlogService {
      * 接受前端传来的图片
      * @return
      */
-    ResultVO getPic(MultipartFile file, HttpServletRequest request, HttpServletResponse response);
+    PicVO getPic(MultipartFile file, HttpServletRequest request, HttpServletResponse response);
 
     /**
      * 删除置顶博客

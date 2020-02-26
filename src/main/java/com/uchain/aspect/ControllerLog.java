@@ -1,6 +1,7 @@
 package com.uchain.aspect;
 
 
+import com.uchain.vo.PicVO;
 import com.uchain.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -41,11 +42,21 @@ public class ControllerLog {
 
     @AfterReturning(pointcut = "controller()", returning = "ret")
     public void after(Object ret) {
-        ResultVO result = (ResultVO) ret;
-        if (result != null && result.getCode() != 0) {
-            log.error(result.getMsg());
+        if(ret instanceof ResultVO) {
+            ResultVO result = (ResultVO) ret;
+            if (result != null && result.getCode() != 0) {
+                log.error(result.getMsg());
+            }
+            log.info("controller返回参数：" + result);
+            log.info("-----------------------------------------------------");
         }
-        log.info("controller返回参数：" + result);
-        log.info("-----------------------------------------------------");
+        else {
+            PicVO picVO = (PicVO) ret;
+            if (picVO != null && picVO.getUploaded() != 1) {
+                log.error(picVO.getUrl());
+            }
+            log.info("controller返回参数：" + picVO);
+            log.info("-----------------------------------------------------");
+        }
     }
 }
