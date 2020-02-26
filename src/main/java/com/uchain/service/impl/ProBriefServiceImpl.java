@@ -8,13 +8,16 @@ import com.uchain.enums.ResultEnum;
 import com.uchain.form.ProBriefForm;
 import com.uchain.service.ProBriefService;
 import com.uchain.util.ResultVOUtil;
-import com.uchain.util.ZipUtils;
 import com.uchain.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -23,12 +26,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.File;
-
-import java.io.IOException;
+import java.io.*;
 
 
-
+import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -125,50 +128,79 @@ public class ProBriefServiceImpl implements ProBriefService {
         }
         String fileUrl = files.get(0).getFileUrl();
         log.info("项目下载路径："+fileUrl);
-        /**
-         * 创建临时文件夹
-         */
-        String proName = proBriefMapper.selectByPrimaryKey(id).getProName();
-        File temDir = new File(linshiPath+proName);
-        if (!temDir.exists()) {
-            temDir.mkdirs();
-        }
-        /**
-         * 生成需要下载的文件，存放入临时文件夹
-         */
-        try {
-            ZipUtils.copyDir(fileUrl, linshiPath+proName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        /**
-         * 设置response的header
-         */
-        ProBrief proBrief = proBriefMapper.selectByPrimaryKey(id);
-        String name = proBrief.getProName();
-        response.setContentType("application/zip");
-        response.setHeader("Content-Disposition", "attachment; filename="+name);
-        /**
-         * 4.调用工具类，下载zip压缩包
-         */
-        try {
-            ZipUtils.toZip(temDir.getPath(), response.getOutputStream(), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        /**
-         * 5.删除临时文件和文件夹
-         */
-        // 这里我没写递归，直接就这样删除了
-        File[] listFiles = temDir.listFiles();
-        if(listFiles.length==0){
+
+        String fileName =  files.get(0).getFileName();
+        File file = new File(fileUrl  + '/' + fileName);
+
+        if(!file.exists()){
             return ResultVOUtil.error(ResultEnum.FILE_IS_NOT_EXIST);
         }
-        for (int i = 0; i < listFiles.length; i++) {
-            listFiles[i].delete();
-            log.info("正在删除第"+(i+1)+"个文件");
+        response.reset();
+        response.setContentType("application/octet-stream");
+        response.setCharacterEncoding("utf-8");
+        response.setContentLength((int) file.length());
+        response.setHeader("Content-Disposition", "attachment;filename="  + fileName );
+
+        try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));) {
+            byte[] buff = new byte[1024];
+            OutputStream os  = response.getOutputStream();
+            int i = 0;
+            while ((i = bis.read(buff)) != -1) {
+                os.write(buff, 0, i);
+                os.flush();
+            }
+        } catch (IOException e) {
+            log.error("{}",e);
+            return ResultVOUtil.error(ResultEnum.FILE_IS_NOT_EXIST);
         }
-        temDir.delete();
+
+
+
+
+//        /**
+//         * 创建临时文件夹
+//         */
+//        String proName = proBriefMapper.selectByPrimaryKey(id).getProName();
+//        File temDir = new File(linshiPath+proName);
+//        if (!temDir.exists()) {
+//            temDir.mkdirs();
+//        }
+//        /**
+//         * 生成需要下载的文件，存放入临时文件夹
+//         */
+//        try {
+//            ZipUtils.copyDir(fileUrl, linshiPath+proName);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        /**
+//         * 设置response的header
+//         */
+//        ProBrief proBrief = proBriefMapper.selectByPrimaryKey(id);
+//        String name = proBrief.getProName();
+//        response.setContentType("application/zip");
+//        response.setHeader("Content-Disposition", "attachment; filename="+name);
+//        /**
+//         * 4.调用工具类，下载zip压缩包
+//         */
+//        try {
+//            ZipUtils.toZip(temDir.getPath(), response.getOutputStream(), true);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        /**
+//         * 5.删除临时文件和文件夹
+//         */
+//        // 这里我没写递归，直接就这样删除了
+//        File[] listFiles = temDir.listFiles();
+//        if(listFiles.length==0){
+//            return ResultVOUtil.error(ResultEnum.FILE_IS_NOT_EXIST);
+//        }
+//        for (int i = 0; i < listFiles.length; i++) {
+//            listFiles[i].delete();
+//            log.info("正在删除第"+(i+1)+"个文件");
+//        }
+//        temDir.delete();
 
         return null;
     }
